@@ -1,0 +1,17 @@
+{
+  "manifestDesc": { "message": "You will never be rickrolled again! You are always on the safe side when using this addon." },
+  "errorTitle": { "message": "Blocked! | RickRollProtector" },
+  "errorHeading": { "message": "Warning: RickRoll detected!" },
+  "errorMessage": { "message": "fab3F got you! You are seeing this warning because this link leads to a known RickRoll." },
+  "btnBack": { "message": "Go Back" },
+  "btnOnce": { "message": "Allow once" },
+  "btnPermanent": { "message": "Allow link permanently" },
+  "popupTitle": { "message": "Allowed RickRolls" },
+  "popupLoading": { "message": "Loading..." },
+  "popupEmpty": { "message": "No videos are currently allowed.<br>You are safe!" },
+  "btnDelete": { "message": "Delete" },
+  "btnReset": { "message": "Delete all" },
+  "updateMessage": { "message": "RickRollProtector: RickRoll list successfully updated!" },
+  "updateMessageWarn": { "message": "RickRollProtector: New list was empty or invalid. Keeping old list." },
+  "updateMessageError": { "message": "RickRollProtector: Could not load the latest list:" }
+}

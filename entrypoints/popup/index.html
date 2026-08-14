@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    [data-i18n] {
+      visibility: hidden;
+    }
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #1e1e1e; color: white; width: 280px; padding: 15px; margin: 0; }
+    h2 { font-size: 16px; margin-top: 0; color: #ff5555; text-align: center; }
+    .exception-list { margin-top: 15px; max-height: 180px; overflow-y: auto; border-top: 1px solid #444; padding-top: 10px; }
+    .exception-item { display: flex; justify-content: space-between; align-items: center; background: #2a2a2a; padding: 6px 10px; margin-bottom: 6px; border-radius: 4px; font-size: 13px; }
+    .video-id { font-family: monospace; color: #ccc; }
+    button { border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .delete-btn { background-color: #ff5555; color: white; padding: 4px 8px; font-size: 12px; }
+    .delete-btn:hover { background-color: #ff7777; }
+    #reset-btn { background-color: #333; color: #fff; padding: 8px 12px; width: 100%; margin-top: 10px; border: 1px solid #555; }
+    #reset-btn:hover { background-color: #444; }
+    .empty-msg { text-align: center; color: #888; font-size: 13px; margin: 20px 0; }
+  </style>
+</head>
+<body>
+  <h2 data-i18n="popupTitle"></h2>
+  
+  <div id="list" class="exception-list">
+    <div class="empty-msg" data-i18n="popupLoading"></div>
+  </div>
+
+  <button id="reset-btn" data-i18n="btnReset"></button>
+
+  <script type="module">
+    import { browser } from 'wxt/browser';
+
+    document.documentElement.lang = browser.i18n.getUILanguage();
+
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+      const key = element.getAttribute('data-i18n');
+      element.innerHTML = browser.i18n.getMessage(key);
+      element.style.visibility = 'visible';
+    });
+
+    async function renderList() {
+      const listContainer = document.getElementById('list');
+      listContainer.innerHTML = '';
+      
+      const data = await browser.storage.local.get(null);
+      const videoIds = Object.keys(data);
+    
+      if (videoIds.length === 0) {
+        listContainer.innerHTML = `<div class="empty-msg">${browser.i18n.getMessage("popupEmpty")}</div>`;
+        return;
+      }
+
+      videoIds.forEach(id => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'exception-item';
+        
+        const status = data[id] === 'once' ? '(1x)' : '';
+        const deleteText = browser.i18n.getMessage("btnDelete");
+        
+        itemDiv.innerHTML = `
+          <span class="video-id" title="Video ID">${id} <small style="color:#777">${status}</small></span>
+          <button class="delete-btn" data-id="${id}">${deleteText}</button>
+        `;
+        listContainer.appendChild(itemDiv);
+      });
+
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', async (event) => {
+          const idToRemove = event.target.getAttribute('data-id');
+          await browser.storage.local.remove(idToRemove);
+          renderList();
+        });
+      });
+    }
+
+    document.getElementById('reset-btn').addEventListener('click', async () => {
+      await browser.storage.local.clear();
+      renderList();
+    });
+
+    renderList();
+  </script>
+</body>
+</html>
