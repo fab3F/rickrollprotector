@@ -21,7 +21,8 @@ document.getElementById("btn-back").addEventListener("click", () => {
 
 document.getElementById("btn-once").addEventListener("click", async () => {
   if (videoId && originalUrl) {
-    await browser.storage.local.set({ [videoId]: 'once' });
+    const expireTime = Date.now() + 220000; 
+    await browser.storage.local.set({ [videoId]: expireTime });
     location.replace(originalUrl);
   }
 });

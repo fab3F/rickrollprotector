@@ -9,12 +9,17 @@ export default defineContentScript({
     if (matchedId) {
       const storageData = await browser.storage.local.get(matchedId);
       const permission = storageData[matchedId];
+      
+      if (permission === 'permanent') {
+        return;
+      }
 
-      if (permission === 'once') {
-        await browser.storage.local.remove(matchedId);
-        return;
-      } else if (permission === 'permanent') {
-        return;
+      if (typeof permission === 'number') {
+        if (Date.now() < permission) {
+          return; 
+        } else {
+          await browser.storage.local.remove(matchedId);
+        }
       }
 
       const errorUrl = new URL(browser.runtime.getURL("error.html"));
