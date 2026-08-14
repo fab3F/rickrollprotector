@@ -73,7 +73,6 @@
     });
   }
 
-  // HIER IST DIE ZWEITE ÄNDERUNG: Nur die Video-Ausnahmen löschen, nicht die Hauptliste
   document.getElementById('reset-btn').addEventListener('click', async () => {
     const data = await browser.storage.local.get(null);
     const keysToRemove = Object.keys(data).filter(key => key !== 'blockedVideoIds');
