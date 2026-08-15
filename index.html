@@ -137,12 +137,12 @@
   <div id="rickelement000" style="display: none;">non</div>
   <script type="text/javascript" style="display: none;" defer>
     setTimeout(function() {
-      if(document.getElementById("rickelement000").innerHTML === "0.1.1.0"){
-        document.getElementById("check").innerHTML = "Sehr gut, du hast den RickRollProtector bereits installiert! Damit bist du gegen 150 Links geschützt, die zu einem RickRoll führen.";
-      }else if(document.getElementById("rickelement000").innerHTML === "non"){
-        document.getElementById("check").innerHTML = "Leider hast du den RickRollProtector noch nicht installiert! Dies ist ein großes Sicherheitsrisiko, da du nicht gegen RickRolls geschützt bist!";
+      if(document.getElementById("rickelement000").textContent === "0.1.1.0"){
+        document.getElementById("check").textContent = "Sehr gut, du hast den RickRollProtector bereits installiert! Damit bist du gegen 150 Links geschützt, die zu einem RickRoll führen.";
+      }else if(document.getElementById("rickelement000").textContent === "non"){
+        document.getElementById("check").textContent = "Leider hast du den RickRollProtector noch nicht installiert! Dies ist ein großes Sicherheitsrisiko, da du nicht gegen RickRolls geschützt bist!";
       }else{
-        document.getElementById("check").innerHTML = "Du verwendest eine alte Version vom RickRollProtector, führe ein Update durch!";
+        document.getElementById("check").textContent = "Du verwendest eine alte Version vom RickRollProtector, führe ein Update durch!";
       }
     }, 2100);
   </script>
