@@ -16,7 +16,7 @@
     .delete-btn:hover { background-color: #ff7777; }
     #reset-btn { background-color: #333; color: #fff; padding: 8px 12px; width: 100%; margin-top: 10px; border: 1px solid #555; }
     #reset-btn:hover { background-color: #444; }
-    .empty-msg { text-align: center; color: #888; font-size: 13px; margin: 20px 0; }
+    .empty-msg { text-align: center; color: #888; font-size: 13px; margin: 20px 0; white-space: pre-line}
   </style>
 </head>
 <body>
@@ -42,34 +42,35 @@
   async function renderList() {
     const listContainer = document.getElementById('list');
     listContainer.textContent = '';
-    
     const data = await browser.storage.local.get(null);
-    
     const videoIds = Object.keys(data).filter(key => key !== 'blockedVideoIds' && typeof data[key] !== 'number');
-  
+
     if (videoIds.length === 0) {
-      listContainer.textContent = `<div class="empty-msg">${browser.i18n.getMessage("popupEmpty")}</div>`;
+      const emptyMsgDiv = document.createElement('div');
+      emptyMsgDiv.className = 'empty-msg';
+      emptyMsgDiv.textContent = browser.i18n.getMessage("popupEmpty"); 
+      listContainer.appendChild(emptyMsgDiv);
       return;
     }
-
     videoIds.forEach(id => {
       const itemDiv = document.createElement('div');
       itemDiv.className = 'exception-item';
-      const deleteText = browser.i18n.getMessage("btnDelete");
-      
-      itemDiv.textContent = `
-        <span class="video-id" title="Video ID">${id} <small style="color:#777">${status}</small></span>
-        <button class="delete-btn" data-id="${id}">${deleteText}</button>
-      `;
-      listContainer.appendChild(itemDiv);
-    });
-
-    document.querySelectorAll('.delete-btn').forEach(btn => {
+      const span = document.createElement('span');
+      span.className = 'video-id';
+      span.title = 'Video ID';
+      span.textContent = id;
+      const btn = document.createElement('button');
+      btn.className = 'delete-btn';
+      btn.dataset.id = id;
+      btn.textContent = browser.i18n.getMessage("btnDelete");
       btn.addEventListener('click', async (event) => {
         const idToRemove = event.target.getAttribute('data-id');
         await browser.storage.local.remove(idToRemove);
         renderList();
       });
+      itemDiv.appendChild(span);
+      itemDiv.appendChild(btn);
+      listContainer.appendChild(itemDiv);
     });
   }
 

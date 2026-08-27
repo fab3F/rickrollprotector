@@ -8,7 +8,7 @@
   "btnPermanent": { "message": "Allow link permanently" },
   "popupTitle": { "message": "Allowed RickRolls" },
   "popupLoading": { "message": "Loading..." },
-  "popupEmpty": { "message": "No videos are currently allowed.<br>You are safe!" },
+  "popupEmpty": { "message": "No videos are currently allowed.\nYou are safe!" },
   "btnDelete": { "message": "Delete" },
   "btnReset": { "message": "Delete all" },
   "updateMessage": { "message": "RickRollProtector: RickRoll list successfully updated!" },
