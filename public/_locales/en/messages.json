@@ -13,5 +13,21 @@
   "btnReset": { "message": "Delete all" },
   "updateMessage": { "message": "RickRollProtector: RickRoll list successfully updated!" },
   "updateMessageWarn": { "message": "RickRollProtector: New list was empty or invalid. Keeping old list." },
-  "updateMessageError": { "message": "RickRollProtector: Could not load the latest list:" }
+  "updateMessageError": { "message": "RickRollProtector: Could not load the latest list:" },
+  "webDescMain": { "message": "Der RickRollProtector läuft unauffällig im Hintergrund und analysiert jeden Link, bevor du ihn öffnest." },
+  "webDescSub": { "message": "Sobald du auf eine getarnte URL klickst, die zu einem RickRoll führt, greift das Addon ein und blockiert die Weiterleitung. Du entscheidest dann selbst, ob du umkehren möchtest." },
+  "webLocalTitle": { "message": "Dein lokaler Schutz" },
+  "webLocalDesc": { "message": "Statistiken aus deinem installierten Addon. Diese Daten bleiben lokal bei dir." },
+  "webStatusLoading": { "message": "Installation wird geprüft..." },
+  "webStatusNoAddon": { "message": "Nicht installiert! Du bist aktuell ungeschützt." },
+  "webStatusOk": { "message": "Addon ist aktiv und auf dem neuesten Stand!" },
+  "webStatusOld": { "message": "Alte Version! Bitte aktualisiere das Addon." },
+  "webStatSaved": { "message": "Gerettet vor RickRolls:" },
+  "webStatExceptions": { "message": "Erlaubte Ausnahmen:" },
+  "webHintExceptions": { "message": "Verwalte deine Ausnahmen direkt über das Addon-Icon." },
+  "webGlobalTitle": { "message": "Globale Datenbank" },
+  "webGlobalDesc": { "message": "Informationen über die offizielle Filterliste auf unseren Servern." },
+  "webGlobalLinks": { "message": "Blockierte Links in DB:" },
+  "webGlobalUpdate": { "message": "Letztes Datenbank-Update:" },
+  "webDownloadTitle": { "message": "Hol dir den ultimativen Schutz für deinen Browser:" }
 }
