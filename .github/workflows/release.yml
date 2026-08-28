@@ -79,16 +79,19 @@ jobs:
           echo "xpi=$(ls .output/*-firefox.zip)" >> $GITHUB_OUTPUT
           echo "src=$(ls .output/*-sources.zip)" >> $GITHUB_OUTPUT
 
+      - name: Install dependencies for AMO script
+        run: npm install jsonwebtoken
+
       - name: Send to Firefox Add-ons (AMO)
-        uses: wdzeng/firefox-addon@v1
-        with:
-          addon-guid: rickrollprotector
-          jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
-          jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
-          xpi: ${{ steps.ff-paths.outputs.xpi }}
-          src: ${{ steps.ff-paths.outputs.src }}
-          release-notes: ${{ steps.notes.outputs.description }}
-          approval-notes: |
+        run: node scripts/upload-amo.mjs
+        env:
+          AMO_JWT_ISSUER: ${{ secrets.FIREFOX_JWT_ISSUER }}
+          AMO_JWT_SECRET: ${{ secrets.FIREFOX_JWT_SECRET }}
+          ADDON_ID: rickrollprotector
+          XPI_PATH: ${{ steps.ff-paths.outputs.xpi }}
+          SRC_PATH: ${{ steps.ff-paths.outputs.src }}
+          RELEASE_NOTES: ${{ steps.notes.outputs.description }}
+          APPROVAL_NOTES: |
             Hello Reviewer,
             
             This extension protects users from known Rickroll links on YouTube.
