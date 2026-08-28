@@ -33,16 +33,11 @@ jobs:
       - name: Release Notes prepare
         id: notes
         run: |
-          TAG_TITLE=$(git for-each-ref refs/tags/${{ github.ref_name }} --format='%(contents:subject)')
+          git fetch origin tag ${{ github.ref_name }} --force
+          TAG_TITLE=$(git tag -l --format='%(contents:subject)' ${{ github.ref_name }})
           if [ -z "$TAG_TITLE" ]; then TAG_TITLE=${{ github.ref_name }}; fi
           echo "title=$TAG_TITLE" >> $GITHUB_OUTPUT
-          
-          echo "description<<EOF" >> $GITHUB_OUTPUT
-          git for-each-ref refs/tags/${{ github.ref_name }} --format='%(contents:body)' >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-          
-          git for-each-ref refs/tags/${{ github.ref_name }} --format='%(contents:body)' > release_notes.md
-          
+          git tag -l --format='%(contents:body)' ${{ github.ref_name }} > release_notes.md
           echo "" >> release_notes.md
           echo "---" >> release_notes.md
           echo "### Download & Install" >> release_notes.md
