@@ -12,7 +12,10 @@ async function renderList() {
   const listContainer = document.getElementById('list');
   listContainer.textContent = '';
   
-  const data = await browser.storage.local.get("exceptions");
+  const data = await browser.storage.local.get(["exceptions", "counter"]);
+  
+  document.getElementById('saved-counter').textContent = data.counter || 0; // counter in popup html
+
   const exceptions = data.exceptions || {};
   
   const videoIds = Object.keys(exceptions).filter(key => typeof exceptions[key] !== 'number');
