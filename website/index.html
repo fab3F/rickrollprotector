@@ -217,9 +217,9 @@
     }
 
     // Load Stats
-    const globalStatsPromise = fetch('stats.json')
+    const globalStatsPromise = fetch('rickrollprotector/stats.json')
       .then(res => res.json())
-      .catch(() => ({ github: "0.0.0.0", firefox: "0.0.0.0", chrome: "0.0.0.0", blockedLinks: 0 }));
+      .catch(() => ({ github: "Error", firefox: "Error", chrome: "Error", blockedLinks: "Error" }));
     globalStatsPromise.then(stats => {
       document.getElementById("global-links").textContent = stats.blockedLinks || "Error";
     });
@@ -244,7 +244,12 @@
       if (isFirefox) expectedVersion = stats.firefox;
       if (isChrome) expectedVersion = stats.chrome;
       
-      isVersionOk = (version === expectedVersion);
+      if(expectedVersion === "Error"){
+        isVersionOk = true;
+      } else {
+        isVersionOk = (version === expectedVersion);
+      }
+
       updateStatusText();
 
       document.getElementById("personal-stats").style.display = "block";
