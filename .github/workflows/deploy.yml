@@ -1,0 +1,43 @@
+name: Deploy Website & Stats
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write 
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Update Stats generieren (ohne Commit!)
+        run: node scripts/update-stats.js
+
+      - name: Prepare Deployment Folder
+        run: |
+          mkdir deploy_dist
+          # 1. Website contents
+          cp -r website/* deploy_dist/
+          # 2. Language stuff
+          cp -r public/* deploy_dist/
+          # 3. list and stats
+          cp data/rickrolls.json deploy_dist/
+          cp data/stats.json deploy_dist/
+
+      - name: Deploy to gh-pages Branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./deploy_dist
