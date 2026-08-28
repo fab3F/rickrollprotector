@@ -14,11 +14,11 @@ export default defineContentScript({
 
     window.dispatchEvent(
       new CustomEvent('RickRollProtectorPing', {
-        detail: { 
+        detail: JSON.stringify({ 
           version: currentVersion,
           amountSaved: count,
           amountExceptions: exceptionsCount
-        }
+        })
       })
     );
   },
