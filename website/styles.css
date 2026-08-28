@@ -51,3 +51,8 @@
   margin-top: 15px;
   flex-wrap: wrap;
 }
+
+#content {
+    padding-bottom: 0.1rem !important; 
+    padding-top: 0.5rem !important;
+  }
