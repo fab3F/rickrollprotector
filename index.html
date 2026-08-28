@@ -237,9 +237,25 @@
     // Addon Ping
     window.addEventListener('RickRollProtectorPing', async (event) => {
       isAddonInstalled = true;
-      const { version, amountSaved, amountExceptions } = event.detail;
+      let addonVersion = "0.0.0.0";
+      let saved = 0;
+      let exceptions = 0;
+
+      try {
+        if (typeof event.detail === 'string') {
+          const parsed = JSON.parse(event.detail);
+          addonVersion = parsed.version || "0.0.0.0";
+          saved = parsed.amountSaved || 0;
+          exceptions = parsed.amountExceptions || 0;
+        } else if (event.detail) {
+          addonVersion = event.detail.version || "0.0.0.0";
+          saved = event.detail.amount || 0; 
+        }
+      } catch (error) {
+        console.warn("Old Addon Version in Firefox");
+      }
+
       const stats = await globalStatsPromise;
-    
       let expectedVersion = stats.github;
       if (isFirefox) expectedVersion = stats.firefox;
       if (isChrome) expectedVersion = stats.chrome;
@@ -247,14 +263,12 @@
       if(expectedVersion === "Error"){
         isVersionOk = true;
       } else {
-        isVersionOk = (version === expectedVersion);
+        isVersionOk = (addonVersion === expectedVersion);
       }
-
       updateStatusText();
-
       document.getElementById("personal-stats").style.display = "block";
-      document.getElementById("stat-saved").textContent = amountSaved || 0;
-      document.getElementById("stat-exceptions").textContent = amountExceptions || 0;
+      document.getElementById("stat-saved").textContent = saved;
+      document.getElementById("stat-exceptions").textContent = exceptions;
     });
 
     setTimeout(() => {
