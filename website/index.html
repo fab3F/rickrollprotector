@@ -127,24 +127,137 @@
   <div id="content" class="background">
     <section class="py-4">
       <div class="container content">
-        <h1 class="fw-light">RickRollProtector</h1>
-        <p class="lead py-2 pb-1" id="check">Installation des Addons wird geprüft...</p>
-        <p class="lead py-2 pb-1">Der RickRollProtector warnt dich jedes mal, wenn du auf einen Link geklickt hast, der zu einem RickRoll führt!</p>
-        <p class="lead py-2 pb-1">Die aktuellesten Downloads findest du immer auf <a href="https://github.com/fab3F/rickrollprotector" target="_blank">GitHub</a>. Die aktuellste Version für Firefox ist verifiziert und du kannst sie offiziell von Firefox <a href="https://addons.mozilla.org/de/firefox/addon/rickrollprotector/" target="_blank">hier</a> installieren.</p>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h1 class="fw-light mb-0">RickRollProtector</h1>
+          <div>
+            <button class="btn btn-sm btn-outline-secondary me-1" onclick="changeLang('de')">DE</button>
+            <button class="btn btn-sm btn-outline-secondary" onclick="changeLang('en')">EN</button>
+          </div>
+        </div>
+        <p class="lead py-2 pb-0 mb-1" data-i18n="webDescMain">Lade Texte...</p>
+        <p class="lead py-0 pb-1" data-i18n="webDescSub"></p>
+        <div class="dashboard-grid">
+          <div class="dashboard-panel">
+            <h4 data-i18n="webLocalTitle">Dein lokaler Schutz</h4>
+            <p class="dashboard-subtitle" data-i18n="webLocalDesc"></p>
+            <p id="check-status" class="stat-value" style="color: #ffc107;" data-i18n="webStatusLoading"></p>
+            <div id="personal-stats" style="display: none; margin-top: 15px;">
+              <p class="stat-row"><strong data-i18n="webStatSaved"></strong> <span id="stat-saved" class="stat-value stat-saved">0</span></p>
+              <p class="stat-row"><strong data-i18n="webStatExceptions"></strong> <span id="stat-exceptions" class="stat-value">0</span></p>
+              <small style="color: #aaa;" data-i18n="webHintExceptions"></small>
+            </div>
+          </div>
+          <div class="dashboard-panel">
+            <h4 data-i18n="webGlobalTitle">Globale Datenbank</h4>
+            <p class="dashboard-subtitle" data-i18n="webGlobalDesc"></p>
+            <p class="stat-row"><strong data-i18n="webGlobalLinks"></strong> <span id="global-links" class="stat-value stat-links">Lädt...</span></p>
+            <p class="stat-row"><strong data-i18n="webGlobalUpdate"></strong> <span id="global-update" class="stat-value">Lädt...</span></p>
+          </div>
+
+        </div>
+        <div class="download-section">
+          <h4 data-i18n="webDownloadTitle"></h4>
+          <div class="download-buttons">
+            <a href="https://addons.mozilla.org/de/firefox/addon/rickrollprotector/" target="_blank" class="btn btn-secondary px-4 py-2"><i class="fa-brands fa-firefox"></i> Firefox Add-on</a>
+            <a href="https://chromewebstore.google.com/detail/rickrollprotector/canjopdiolhgekkdoibphhiggfdphhco" target="_blank" class="btn btn-secondary px-4 py-2"><i class="fa-brands fa-chrome"></i> Chrome Web Store</a>
+          </div>
+        </div>
       </div>
     </section>
   </div>
-  <div id="rickelement000" style="display: none;">non</div>
-  <script type="text/javascript" style="display: none;" defer>
-    setTimeout(function() {
-      if(document.getElementById("rickelement000").textContent === "0.1.1.0"){
-        document.getElementById("check").textContent = "Sehr gut, du hast den RickRollProtector bereits installiert! Damit bist du gegen 150 Links geschützt, die zu einem RickRoll führen.";
-      }else if(document.getElementById("rickelement000").textContent === "non"){
-        document.getElementById("check").textContent = "Leider hast du den RickRollProtector noch nicht installiert! Dies ist ein großes Sicherheitsrisiko, da du nicht gegen RickRolls geschützt bist!";
-      }else{
-        document.getElementById("check").textContent = "Du verwendest eine alte Version vom RickRollProtector, führe ein Update durch!";
+  <link rel="stylesheet" href="rickrollprotector/styles.css" type="text/css">
+  <script type="text/javascript">
+    // Language
+    let currentMessages = {};
+    let currentLang = (navigator.language || navigator.userLanguage).toLowerCase().startsWith('de') ? 'de' : 'en';
+
+    async function changeLang(lang) {
+      currentLang = lang;
+      try {
+        const response = await fetch(`_locales/${lang}/messages.json`);
+        currentMessages = await response.json();
+        
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (currentMessages[key]) {
+            el.textContent = currentMessages[key].message;
+          }
+        });
+        
+        if(currentMessages["manifestDesc"]) {
+          document.querySelector('meta[name="description"]').setAttribute("content", currentMessages["manifestDesc"].message);
+        }
+        
+        updateStatusText(); 
+      } catch (error) {
+        console.warn("Couldnt load language file:", error);
       }
+    }
+
+    // Status Update
+    let isAddonInstalled = false;
+    let isVersionOk = false;
+    const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
+    const isChrome = navigator.userAgent.toLowerCase().includes('chrome');
+
+    function updateStatusText() {
+      if (Object.keys(currentMessages).length === 0) return;
+      const el = document.getElementById("check-status");
+      
+      if (!isAddonInstalled) {
+        el.textContent = currentMessages["webStatusNoAddon"].message;
+        el.style.color = "#ff5555";
+      } else if (isVersionOk) {
+        el.textContent = currentMessages["webStatusOk"].message;
+        el.style.color = "#28a745";
+      } else {
+        el.textContent = currentMessages["webStatusOld"].message;
+        el.style.color = "#ffc107";
+      }
+    }
+
+    // Load Stats
+    const globalStatsPromise = fetch('stats.json')
+      .then(res => res.json())
+      .catch(() => ({ github: "0.0.0.0", firefox: "0.0.0.0", chrome: "0.0.0.0", blockedLinks: 0 }));
+    globalStatsPromise.then(stats => {
+      document.getElementById("global-links").textContent = stats.blockedLinks || "Error";
+    });
+
+    // get last update
+    fetch('https://api.github.com/repos/fab3F/rickrollprotector/commits?per_page=1')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.length > 0) {
+          document.getElementById("global-update").textContent = new Date(data[0].commit.committer.date).toLocaleDateString();
+        }
+      })
+      .catch(() => { document.getElementById("global-update").textContent = "Error"; });
+
+    // Addon Ping
+    window.addEventListener('RickRollProtectorPing', async (event) => {
+      isAddonInstalled = true;
+      const { version, amountSaved, amountExceptions } = event.detail;
+      const stats = await globalStatsPromise;
+    
+      let expectedVersion = stats.github;
+      if (isFirefox) expectedVersion = stats.firefox;
+      if (isChrome) expectedVersion = stats.chrome;
+      
+      isVersionOk = (version === expectedVersion);
+      updateStatusText();
+
+      document.getElementById("personal-stats").style.display = "block";
+      document.getElementById("stat-saved").textContent = amountSaved || 0;
+      document.getElementById("stat-exceptions").textContent = amountExceptions || 0;
+    });
+
+    setTimeout(() => {
+      if (!isAddonInstalled) updateStatusText();
     }, 2100);
+
+    // Initial lang change
+    changeLang(currentLang);
   </script>
 
   <!-- Footer -->

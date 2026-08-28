@@ -1,0 +1,53 @@
+.dashboard-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.dashboard-panel {
+  flex: 1;
+  min-width: 280px;
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.dashboard-panel h4 {
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.dashboard-subtitle {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 20px;
+  min-height: 40px;
+}
+
+.stat-row {
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-weight: bold;
+}
+
+.stat-saved { color: #28a745; }
+.stat-links { color: #ff5555; font-size: 1.1em; }
+
+.download-section {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #444;
+  text-align: center;
+}
+
+.download-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
