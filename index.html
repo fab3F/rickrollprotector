@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head prefix="og: https://ogp.me/ns#">
+	
+<title>RickRollProtector - fab3F Homepage</title>
+
+<!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Du wirst nie wieder gerickrolled werden! Du bist immer auf der sicheren Seite, wenn du dieses Addon benutzt. | fab3F Homepage - Hier gibt es viele Projekte, ausgeklügelt programmiert (natürlich) und Links zu weiteren vielen tollen Projekten!">
+<meta name="keywords" content="fab3F, fab3F Homepage, programmieren, Projekte, homepage, home, html, css, js, javascript, addon, extension, firefox, chrome, rickroll, rick, rick roll, roll, rick roll protector, rickrollprotector, rickroll protector">
+<meta name="author" content="fab3F">
+<meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+
+<!-- Base -->
+<base href="https://fab3F.github.io/" target="_self">
+<link rel="manifest" href="site.webmanifest">
+
+<!-- Styles -->
+<link rel="stylesheet" href="css/reset.css" type="text/css">
+<link rel="stylesheet" href="css/main.css" type="text/css">
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/classes.css"type="text/css">
+<link rel="stylesheet" href="css/styles.css" type="text/css">
+<link rel="stylesheet" href="css/footer.css" type="text/css">
+<link rel="stylesheet" href="css/cookies.css" type="text/css">
+
+<!-- Footer Social Media Icons Stylesheet -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.css" integrity="sha512-KOWhIs2d8WrPgR4lTaFgxI35LLOp5PRki/DxQvb7mlP29YZ5iJ5v8tiLWF7JLk5nDBlgPP1gHzw96cZ77oD7zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+<link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="apple-mobile-web-app-title" content="fab3F Homepage">
+<meta name="application-name" content="fab3F Homepage">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#202124">
+	
+<!-- Social Media Stuff -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="fab3F Homepage">
+<meta property="og:title" content="RickRollProtector - fab3F Homepage" />
+<meta property="og:url" content="https://fab3F.github.io/rickrollprotector/" />
+<meta property="og:description" content="Du wirst nie wieder gerickrolled werden! Du bist immer auf der sicheren Seite, wenn du dieses Addon benutzt. | Hier findest du alle wichtigen Infos zum fab3F Twitch Bot | fab3F Homepage - Hier gibt es viele Projekte, ausgeklügelt programmiert (natürlich) und Links zu weiteren vielen tollen Projekten!" />
+<meta property="og:image" content="images/fab3F_white.png" />
+<meta name="twitter:site" content="@fab3F_official" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:creator" content="@fab3F_official" />
+
+<!-- Script für leere Seite füllen -->
+<script src="js/space.js" defer></script>
+
+<!-- Google Search canonical -->
+<link rel="canonical" href="https://fab3F.github.io/rickrollprotector/" />
+
+<!-- Cookies -->
+<script src="js/cookies.js" defer></script>
+
+</head>
+
+<body>
+
+  <!-- Cookie Popup -->
+  <div id="cookie-popup">
+    <div id="cookie-content">
+      <h2>Datenschutzeinstellungen</h2>
+      <p>Wir verwenden Cookies und ähnliche Technologien, um sicherzustellen, dass wir Ihnen die bestmögliche Erfahrung auf unserer Website bieten können. Sie können Ihre Einstellungen jederzeit in der Fußzeile ändern. 
+        Weitere Informationen dazu finden Sie hier:</p>
+      <p><a href="idn">Impressum, Datenschutz & Nutzungsbedingungen</a></p>
+      <div class="cookie-button-container">
+        <button id="cookie-accept-all">Alle Akzeptieren</button>
+        <button id="cookie-reject-all">Alle Ablehnen</button>
+        <button id="cookie-settings">Einstellungen</button>
+      </div>
+    </div>
+    <div id="cookie-settings-content">
+      <h2>Einstellungen</h2>
+      <p>Bitte wählen Sie aus, welche Cookies und ähnliche Technologien auf dieser Website verwendet werden dürfen.</p>
+      <form>
+        <h4>Analyse-Technologien und Cookies:</h4>
+        <input type="checkbox" id="switch_gtm" name="gtm" checked/><label for="switch_gtm" class="switch-label">Toggle_GTM</label>
+        <h5 class="cookie-name">Google Tag Manager</h5>
+        <p>Tool, mit dem Tags und Tracking-Codes einer Website zentral verwaltet und auf der Website eingefügt werden können, um das Nutzerverhalten zu messen und zu analysieren.</p>
+        <input type="checkbox" id="switch_ga" name="ga" checked/><label for="switch_ga" class="switch-label">Toggle_GA</label>
+        <h5 class="cookie-name">Google Analytics</h5>
+        <p>Ein Web-Analyse-Tool zu Analyse des Besucherverhaltens, um Erkenntnisse darüber zu gewinnen, wie Nutzer mit der Website interagieren und wie die Website verbessert werden kann.</p>
+      </form>
+      <div class="cookie-button-container">
+        <button id="cookie-save" onclick="saveCookieSettings()">Auswahl speichern</button>
+        <button id="cookie-back" onclick="showCookiePopup()">Zurück</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="home" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a href="#home"><img src="images/fab3F.png" class="logo responsive" alt="fab3F Logo"></a>
+      <a class="navbar-brand" href="#home">Homepage</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">Über mich</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#projects">Projekte</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Kontakt</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div id="content" class="background">
+    <section class="py-4">
+      <div class="container content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h1 class="fw-light mb-0">RickRollProtector</h1>
+          <div>
+            <button class="btn btn-sm btn-outline-secondary me-1" onclick="changeLang('de')">DE</button>
+            <button class="btn btn-sm btn-outline-secondary" onclick="changeLang('en')">EN</button>
+          </div>
+        </div>
+        <p class="lead py-2 pb-0 mb-1" data-i18n="webDescMain">Lade Texte...</p>
+        <p class="lead py-0 pb-1" data-i18n="webDescSub"></p>
+        <div class="dashboard-grid">
+          <div class="dashboard-panel">
+            <h4 data-i18n="webLocalTitle">Dein lokaler Schutz</h4>
+            <p class="dashboard-subtitle" data-i18n="webLocalDesc"></p>
+            <p id="check-status" class="stat-value" style="color: #ffc107;" data-i18n="webStatusLoading"></p>
+            <div id="personal-stats" style="display: none; margin-top: 15px;">
+              <p class="stat-row"><strong data-i18n="webStatSaved"></strong> <span id="stat-saved" class="stat-value stat-saved">0</span></p>
+              <p class="stat-row"><strong data-i18n="webStatExceptions"></strong> <span id="stat-exceptions" class="stat-value">0</span></p>
+              <small style="color: #aaa;" data-i18n="webHintExceptions"></small>
+            </div>
+          </div>
+          <div class="dashboard-panel">
+            <h4 data-i18n="webGlobalTitle">Globale Datenbank</h4>
+            <p class="dashboard-subtitle" data-i18n="webGlobalDesc"></p>
+            <p class="stat-row"><strong data-i18n="webGlobalLinks"></strong> <span id="global-links" class="stat-value stat-links">Lädt...</span></p>
+            <p class="stat-row"><strong data-i18n="webGlobalUpdate"></strong> <span id="global-update" class="stat-value">Lädt...</span></p>
+          </div>
+
+        </div>
+        <div class="download-section">
+          <h4 data-i18n="webDownloadTitle"></h4>
+          <div class="download-buttons">
+            <a href="https://addons.mozilla.org/de/firefox/addon/rickrollprotector/" target="_blank" class="btn btn-secondary px-4 py-2"><i class="fa-brands fa-firefox"></i> Firefox Add-on</a>
+            <a href="https://chromewebstore.google.com/detail/rickrollprotector/canjopdiolhgekkdoibphhiggfdphhco" target="_blank" class="btn btn-secondary px-4 py-2"><i class="fa-brands fa-chrome"></i> Chrome Web Store</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <link rel="stylesheet" href="rickrollprotector/styles.css" type="text/css">
+  <script type="text/javascript">
+    // Language
+    let currentMessages = {};
+    let currentLang = (navigator.language || navigator.userLanguage).toLowerCase().startsWith('de') ? 'de' : 'en';
+
+    async function changeLang(lang) {
+      currentLang = lang;
+      try {
+        const response = await fetch(`_locales/${lang}/messages.json`);
+        currentMessages = await response.json();
+        
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (currentMessages[key]) {
+            el.textContent = currentMessages[key].message;
+          }
+        });
+        
+        if(currentMessages["manifestDesc"]) {
+          document.querySelector('meta[name="description"]').setAttribute("content", currentMessages["manifestDesc"].message);
+        }
+        
+        updateStatusText(); 
+      } catch (error) {
+        console.warn("Couldnt load language file:", error);
+      }
+    }
+
+    // Status Update
+    let isAddonInstalled = false;
+    let isVersionOk = false;
+    const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
+    const isChrome = navigator.userAgent.toLowerCase().includes('chrome');
+
+    function updateStatusText() {
+      if (Object.keys(currentMessages).length === 0) return;
+      const el = document.getElementById("check-status");
+      
+      if (!isAddonInstalled) {
+        el.textContent = currentMessages["webStatusNoAddon"].message;
+        el.style.color = "#ff5555";
+      } else if (isVersionOk) {
+        el.textContent = currentMessages["webStatusOk"].message;
+        el.style.color = "#28a745";
+      } else {
+        el.textContent = currentMessages["webStatusOld"].message;
+        el.style.color = "#ffc107";
+      }
+    }
+
+    // Load Stats
+    const globalStatsPromise = fetch('stats.json')
+      .then(res => res.json())
+      .catch(() => ({ github: "0.0.0.0", firefox: "0.0.0.0", chrome: "0.0.0.0", blockedLinks: 0 }));
+    globalStatsPromise.then(stats => {
+      document.getElementById("global-links").textContent = stats.blockedLinks || "Error";
+    });
+
+    // get last update
+    fetch('https://api.github.com/repos/fab3F/rickrollprotector/commits?per_page=1')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.length > 0) {
+          document.getElementById("global-update").textContent = new Date(data[0].commit.committer.date).toLocaleDateString();
+        }
+      })
+      .catch(() => { document.getElementById("global-update").textContent = "Error"; });
+
+    // Addon Ping
+    window.addEventListener('RickRollProtectorPing', async (event) => {
+      isAddonInstalled = true;
+      const { version, amountSaved, amountExceptions } = event.detail;
+      const stats = await globalStatsPromise;
+    
+      let expectedVersion = stats.github;
+      if (isFirefox) expectedVersion = stats.firefox;
+      if (isChrome) expectedVersion = stats.chrome;
+      
+      isVersionOk = (version === expectedVersion);
+      updateStatusText();
+
+      document.getElementById("personal-stats").style.display = "block";
+      document.getElementById("stat-saved").textContent = amountSaved || 0;
+      document.getElementById("stat-exceptions").textContent = amountExceptions || 0;
+    });
+
+    setTimeout(() => {
+      if (!isAddonInstalled) updateStatusText();
+    }, 2100);
+
+    // Initial lang change
+    changeLang(currentLang);
+  </script>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer-distributed">
+    <div class="footer-right">
+      
+      <a href="link/youtube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="link/x"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="link/instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="link/github"><i class="fa-brands fa-github"></i></a>
+      <a href="link/discord"><i class="fa-brands fa-discord"></i></a>
+      
+    </div>
+    <div class="footer-left">
+  
+      <p class="footer-links">
+        <a href="#home" class="link-1">Home</a>
+        <a href="#projects">Projekte</a>
+        <a href="#contact">Kontakt</a>
+        <a href="idn">Impressum, Datenschutz & Nutzungsbedingungen</a>
+        <a onclick="showCookiePopup()">Datenschutzeinstellungen</a>
+      </p>
+      
+      <p class="footer-emailtext">E-Mail: 
+        <a class="footer-emaillink" href="mailto:fab3F@programmer.net">fab3F@programmer.net</a>
+      </p>
+    </div>
+  </footer>
+  
+</body>
+</html>
