@@ -216,6 +216,23 @@
       }
     }
 
+    // compare versions function
+    function isVersionOlder(installed, expected) {
+      if (!installed || !expected) return false;
+
+      const instParts = installed.split('.').map(Number);
+      const expParts = expected.split('.').map(Number);
+      const maxLength = Math.max(instParts.length, expParts.length);
+
+      for (let i = 0; i < maxLength; i++) {
+        const instVal = instParts[i] || 0;
+        const expVal = expParts[i] || 0;
+        if (instVal < expVal) return true;
+        if (instVal > expVal) return false;
+      }
+      return false;
+    }
+
     // Load Stats
     const globalStatsPromise = fetch('rickrollprotector/stats.json')
       .then(res => res.json())
@@ -252,7 +269,7 @@
           saved = event.detail.amount || 0; 
         }
       } catch (error) {
-        console.warn("Old Addon Version in Firefox");
+        console.warn("Old Addon Version in Firefox or parsing failed");
       }
 
       const stats = await globalStatsPromise;
@@ -260,10 +277,12 @@
       if (isFirefox) expectedVersion = stats.firefox;
       if (isChrome) expectedVersion = stats.chrome;
       
-      if(expectedVersion === "Error"){
+      if(expectedVersion === "Error" || !expectedVersion){
         isVersionOk = true;
+      } else if (addonVersion === "0.0.0.0") {
+        isVersionOk = false;
       } else {
-        isVersionOk = (addonVersion === expectedVersion);
+        isVersionOk = !isVersionOlder(addonVersion, expectedVersion);
       }
       updateStatusText();
       document.getElementById("personal-stats").style.display = "block";
