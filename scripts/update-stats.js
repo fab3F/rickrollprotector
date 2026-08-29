@@ -22,7 +22,7 @@ async function updateStats() {
         }
     });
     const crXml = await crRes.text();
-    const match = crXml.match(/version="([^"]+)"/);
+    const match = crXml.match(/<updatecheck[^>]+version="([^"]+)"/);
     if (match) {
       stats.chrome = match[1];
     } else {
