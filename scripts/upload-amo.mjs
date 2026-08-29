@@ -98,9 +98,9 @@ async function main() {
     console.log(`Version ${versionStr} successfully created!`);
 
     let finalReleaseNotes = RELEASE_NOTES || '';
-    if (fs.existsSync('release_notes.md')) {
-      console.log('Reading release notes directly from release_notes.md...');
-      finalReleaseNotes = fs.readFileSync('release_notes.md', 'utf8');
+    if (fs.existsSync('amo_notes.md')) {
+      console.log('Reading release notes directly from amo_notes.md...');
+      finalReleaseNotes = fs.readFileSync('amo_notes.md', 'utf8');
     }
 
     if (finalReleaseNotes.trim() !== '') {

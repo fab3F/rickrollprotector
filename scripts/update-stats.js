@@ -16,15 +16,21 @@ async function updateStats() {
     if (ffData.current_version) stats.firefox = ffData.current_version.version;
   } catch (e) { console.warn("Firefox Fetch failed"); }
   try {
-    const crRes = await fetch('https://chromewebstore.google.com/detail/rickrollprotector/canjopdiolhgekkdoibphhiggfdphhco', {
+    const crRes = await fetch('https://clients2.google.com/service/update2/crx?response=updatecheck&prodversion=120.0&acceptformat=crx3&x=id%3Dcanjopdiolhgekkdoibphhiggfdphhco%26uc', {
         headers: {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         }
     });
-    const crHtml = await crRes.text();
-    const match = crHtml.match(/<meta itemprop="version" content="([^"]+)"/);
-    if (match) stats.chrome = match[1];
-  } catch (e) { console.warn("Chrome Fetch failed"); }
+    const crXml = await crRes.text();
+    const match = crXml.match(/version="([^"]+)"/);
+    if (match) {
+      stats.chrome = match[1];
+    } else {
+      console.warn("Chrome Regex found nothing in XML.");
+    }
+  } catch (e) { 
+    console.warn("Chrome Fetch failed", e); 
+  }
   fs.writeFileSync('data/stats.json', JSON.stringify(stats, null, 2));
 }
 
