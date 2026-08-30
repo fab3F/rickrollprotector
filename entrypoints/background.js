@@ -1,7 +1,7 @@
 import { browser } from 'wxt/browser';
 
 export default defineBackground(() => {
-  const LIST_URL = "https://fab3F.github.io/rickrollprotector/rickrolls.json";
+  const LIST_URL = "https://raw.githubusercontent.com/fab3F/rickrollprotector/refs/heads/gh-pages/rickrolls.json";
 
   async function fetchLatestRickRolls() {
     try {
